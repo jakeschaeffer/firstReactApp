@@ -6,18 +6,16 @@ import './index.css';
 // 1. They do not maintain state
 // 2. Receive values from Board component
 // 3. Inform the Board component when they're clicked
-class Square extends React.Component {
-  render() {
-    return (
-      // when Square clicked, onClick provided by Board is called
-      <button 
-        className="square" 
-        onClick={() => this.props.onClick({value: "X"})}
-      >
-        {this.props.value}
-      </button>
-    );
-  }
+
+// Then replaced Square class with "functional component"
+// Simpler way to write components that only have render method (no state)
+// this.props just becomes props
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
 }
 
 class Board extends React.Component {
