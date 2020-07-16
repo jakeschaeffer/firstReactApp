@@ -5,9 +5,10 @@ import './index.css';
 class Square extends React.Component {
   render() {
     return (
+      // when Square clicked, onClick provided by Board is called
       <button 
         className="square" 
-        onClick={() => this.props.onClick({value: "X"})}ç
+        onClick={() => this.props.onClick({value: "X"})}
       >
         {this.props.value}
       </button>
@@ -31,6 +32,8 @@ class Board extends React.Component {
 
   renderSquare(i) {
     return (
+      // two props passed from Board to Square
+      // onClick prop is f(x) Square can call when clicked
       <Square 
         value={this.state.squares[i]}
         onClick={() => this.handleClick(i)}
