@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+// Square components are "controlled components", meaning:
+// 1. They do not maintain state
+// 2. Receive values from Board component
+// 3. Inform the Board component when they're clicked
 class Square extends React.Component {
   render() {
     return (
@@ -25,6 +29,7 @@ class Board extends React.Component {
   }
 
   handleClick(i) {
+    // .slice copies array and edits that as opposed to in place
     const squares = this.state.squares.slice();
     squares[i] = 'X';
     this.setState({squares: squares})
