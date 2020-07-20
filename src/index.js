@@ -11,7 +11,7 @@ import './index.css';
 // Simpler way to write components that only have render method (no state)
 // this.props just becomes props
 function Square(props) {
-  return (
+  return ( 
     <button className="square" onClick={props.onClick}>
       {props.value}
     </button>
