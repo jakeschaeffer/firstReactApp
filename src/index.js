@@ -19,27 +19,6 @@ function Square(props) {
 }
 
 class Board extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      squares: Array(9).fill(null),
-      xIsNext: true,
-    };
-  }
-
-  handleClick(i) {
-    // .slice copies array and edits that as opposed to in place
-    const squares = this.state.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
-      return;
-    }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({
-      squares: squares,
-      xIsNext: !this.state.xIsNext
-    });
-  }
-
   renderSquare(i) {
     return (
       // two props passed from Board to Square
@@ -85,13 +64,31 @@ class Game extends React.Component {
     };
   }
 
+  handleClick(i) {
+    // .slice copies array and edits that as opposed to in place
+    const history = this.state.history;
+    const current = history[history.length - 1];
+    const squares = current.squares.slice();
+    if (calculateWinner(squares) || squares[i]) {
+      return;
+    }
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    this.setState({
+      history: history.concat([{
+        squares: squares,
+      }]),
+      xIsNext: !this.state.xIsNext
+    });
+  }
+
   render() {
     const history = this.state.history;
     const current = history[history.length - 1];
     const winner = calculateWinner(current.squares);
+
     let status;
     if (winner) {
-      status = 'Winner ' + winner;
+      status = 'Winner: ' + winner;
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
@@ -100,7 +97,7 @@ class Game extends React.Component {
       <div className="game">
         <div className="game-board">
           <Board 
-            square={current.squares}
+            squares={current.squares}
             onClick={(i) => this.handleClick(i)}
           />
         </div>
@@ -112,6 +109,13 @@ class Game extends React.Component {
     );
   }
 }
+
+// ========================================
+
+ReactDOM.render(
+  <Game />,
+  document.getElementById('root')
+);
 
 function calculateWinner(squares) {
   const lines = [
@@ -132,11 +136,3 @@ function calculateWinner(squares) {
   }
   return null;
 }
-
-
-// ========================================
-
-ReactDOM.render(
-  <Game />,
-  document.getElementById('root')
-);
