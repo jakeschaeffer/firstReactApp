@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gap-chart demo</title>
+<style>
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #101a33; background: #fff; }
+  main { max-width: 1160px; margin: 0 auto; padding: 32px 20px 80px; }
+  h2 { font-size: 15px; font-weight: 600; color: #5c6470; margin: 48px 0 12px; }
+  .box { border: 1px dashed #d8dde6; border-radius: 8px; padding: 16px; }
+  .card { background: #f4f5f7; border: none; border-radius: 12px; padding: 28px; }
+  .row { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+</style>
+<script src="gap-chart.js"></script>
+</head>
+<body>
+<main>
+  <h2>Full width (blog hero)</h2>
+  <div class="box" id="full"><gap-chart></gap-chart></div>
+
+  <h2>On a light-gray card (like the source image)</h2>
+  <div class="card" id="cardbg" style="max-width:900px"><gap-chart></gap-chart></div>
+
+  <h2>Blog column · 720px</h2>
+  <div class="box" id="w720" style="width:720px"><gap-chart></gap-chart></div>
+
+  <h2>Small containers · 420px and 320px</h2>
+  <div class="row">
+    <div class="box" id="w420" style="width:420px"><gap-chart></gap-chart></div>
+    <div class="box" id="w320" style="width:320px"><gap-chart></gap-chart></div>
+  </div>
+</main>
+</body>
+</html>
